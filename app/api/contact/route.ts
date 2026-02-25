@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       from: "Digital Africa Xpace <info@daxsarl.net>",
       to: "info@daxsarl.net",
       subject: subject || "Nouveau message depuis le site",
-      reply_to: email,
+      replyto: email,
       html: `
         <h2>Nouveau message depuis le site</h2>
         <p><strong>Nom :</strong> ${fullName}</p>
