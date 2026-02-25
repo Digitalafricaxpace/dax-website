@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Services({ locale }: { locale: string }) {
   const isFR = locale === "fr";
@@ -10,12 +11,19 @@ export default function Services({ locale }: { locale: string }) {
       <div className="max-w-7xl mx-auto px-12 grid md:grid-cols-2 gap-20 items-center">
 
         {/* Left Visual */}
-        <div className="h-[420px] bg-white rounded-lg shadow-sm flex items-center justify-center">
-          <span className="text-gray-400">
-            {isFR
-              ? "Illustration Services / Transformation digitale"
-              : "Services Illustration / Digital Transformation"}
-          </span>
+        <div className="relative h-[420px] rounded-xl overflow-hidden shadow-lg">
+
+          <Image
+            src="/images/services.jpg"
+            alt="Institutional digital services"
+            fill
+            className="object-cover"
+            priority
+          />
+
+          {/* Overlay léger institutionnel */}
+          <div className="absolute inset-0 bg-secondary/20"></div>
+
         </div>
 
         {/* Right Content */}

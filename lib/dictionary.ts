@@ -4,7 +4,7 @@ export const dictionary = {
       home: "Accueil",
       about: "À propos",
       services: "Services",
-      products: "Produits",
+      products: "Projets",
       contact: "Contact",
     },
 
@@ -29,7 +29,7 @@ export const dictionary = {
       home: "Home",
       about: "About",
       services: "Services",
-      products: "Products",
+      products: "Projects",
       contact: "Contact",
     },
 

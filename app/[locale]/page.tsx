@@ -52,6 +52,7 @@ import Hero from "@/components/sections/Hero";
 import ServicesPreview from "@/components/sections/Services";
 import ProductsPreview from "@/components/sections/Product";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import Clients from "@/components/sections/Clients";
 
 export default async function Home({
   params,
@@ -65,7 +66,7 @@ export default async function Home({
     <>
       <Hero locale={safeLocale} />
       <ServicesPreview locale={safeLocale} />
-      <ProductsPreview locale={safeLocale} />
+      <Clients locale={safeLocale} />
       <WhyChooseUs locale={safeLocale} />
     </>
   );

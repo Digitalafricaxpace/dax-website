@@ -150,13 +150,40 @@ export default async function ContactPage({
               {t.formTitle}
             </h2>
 
-            <form className="space-y-6">
+            <form
+  className="space-y-6"
+  onSubmit={async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const data = {
+      fullName: formData.get("fullName"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    if (res.ok) {
+      alert("Message envoyé avec succès");
+      e.currentTarget.reset();
+    } else {
+      alert("Erreur lors de l'envoi");
+    }
+  }}
+>
 
               <div>
                 <label className="block text-sm mb-2 text-gray-600">
                   {t.fullName}
                 </label>
-                <input
+                <input name="fullName"
                   type="text"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
                   required
@@ -167,7 +194,7 @@ export default async function ContactPage({
                 <label className="block text-sm mb-2 text-gray-600">
                   Email
                 </label>
-                <input
+                <input name="email"
                   type="email"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
                   required
@@ -178,7 +205,7 @@ export default async function ContactPage({
                 <label className="block text-sm mb-2 text-gray-600">
                   {t.subject}
                 </label>
-                <input
+                <input name="subject"
                   type="text"
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
                 />
@@ -188,7 +215,7 @@ export default async function ContactPage({
                 <label className="block text-sm mb-2 text-gray-600">
                   {t.message}
                 </label>
-                <textarea
+                <textarea name="message"
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
                   required
