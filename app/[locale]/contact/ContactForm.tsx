@@ -1,44 +1,97 @@
 "use client";
 
-import { useState } from "react";
+type ContactTranslations = {
+  fullName: string;
+  subject: string;
+  message: string;
+  send: string;
+};
 
-export default function ContactForm() {
-  const [loading, setLoading] = useState(false);
+interface ContactFormProps {
+  t: ContactTranslations;
+}
 
+export default function ContactForm({ t }: ContactFormProps) {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setLoading(true);
 
     const formData = new FormData(e.currentTarget);
 
+    const data = {
+      fullName: formData.get("fullName"),
+      email: formData.get("email"),
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    };
+
     const res = await fetch("/api/contact", {
       method: "POST",
-      body: JSON.stringify({
-        fullName: formData.get("fullName"),
-        email: formData.get("email"),
-        subject: formData.get("subject"),
-        message: formData.get("message"),
-      }),
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     });
 
-    setLoading(false);
-
     if (res.ok) {
-      alert("Message envoyé !");
+      alert("Message envoyé avec succès");
+      e.currentTarget.reset();
     } else {
-      alert("Erreur.");
+      alert("Erreur lors de l'envoi");
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <input name="fullName" placeholder="Nom" required />
-      <input name="email" placeholder="Email" required />
-      <input name="subject" placeholder="Sujet" />
-      <textarea name="message" placeholder="Message" required />
-      <button type="submit" disabled={loading}>
-        {loading ? "Envoi..." : "Envoyer"}
+    <form className="space-y-6" onSubmit={handleSubmit}>
+      <div>
+        <label className="block text-sm mb-2 text-gray-600">
+          {t.fullName}
+        </label>
+        <input
+          name="fullName"
+          type="text"
+          required
+          className="w-full px-4 py-3 border border-gray-300 rounded-md"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm mb-2 text-gray-600">
+          Email
+        </label>
+        <input
+          name="email"
+          type="email"
+          required
+          className="w-full px-4 py-3 border border-gray-300 rounded-md"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm mb-2 text-gray-600">
+          {t.subject}
+        </label>
+        <input
+          name="subject"
+          type="text"
+          className="w-full px-4 py-3 border border-gray-300 rounded-md"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm mb-2 text-gray-600">
+          {t.message}
+        </label>
+        <textarea
+          name="message"
+          rows={5}
+          required
+          className="w-full px-4 py-3 border border-gray-300 rounded-md"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-secondary text-white py-4 rounded-md hover:opacity-90 transition"
+      >
+        {t.send}
       </button>
     </form>
   );
