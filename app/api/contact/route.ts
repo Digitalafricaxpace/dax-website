@@ -1,18 +1,18 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-export async function POST(req: Request) {
-  if (!process.env.RESEND_API_KEY) {
-    return NextResponse.json(
-      { error: "Missing API key" },
-      { status: 500 }
-    );
-  }
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        { error: "Missing API key" },
+        { status: 500 }
+      );
+    }
 
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
+    const body = await req.json();
     const { fullName, email, subject, message } = body;
 
     if (!fullName || !email || !message) {
