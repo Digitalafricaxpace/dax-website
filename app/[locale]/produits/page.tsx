@@ -52,16 +52,38 @@ export default async function ProjetsPage({
   return (
     <>
       {/* HERO */}
-      <section className="pt-40 md:pt-48 pb-20 md:pb-24 bg-secondary text-white text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-logo mb-6">
-            {content.title}
-          </h1>
-          <p className="text-gray-300 text-lg">
-            {content.subtitle}
-          </p>
-        </div>
-      </section>
+{/* HERO */}
+<section className="relative pt-36 md:pt-44 lg:pt-48 pb-20 md:pb-24 bg-secondary text-white text-center overflow-hidden">
+
+  {/* SHAPE LEFT */}
+  <img
+    src="/images/dax-shapes.png"
+    alt=""
+    className="
+      pointer-events-none
+      absolute
+      left-0
+      bottom-0
+      w-40
+      md:w-64
+      lg:w-80
+      opacity-20
+      brightness-0
+      invert
+      z-0
+    "
+  />
+
+  <div className="relative z-10 max-w-4xl mx-auto px-6">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-logo mb-6">
+      {content.title}
+    </h1>
+
+    <p className="text-gray-300 text-base sm:text-lg">
+      {content.subtitle}
+    </p>
+  </div>
+</section>
 
       {/* PROJECT GRID */}
       <section className="py-20 md:py-24 bg-white">

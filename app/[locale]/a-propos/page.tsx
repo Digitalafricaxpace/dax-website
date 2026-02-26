@@ -5,47 +5,42 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-
   const isFR = params.locale === "fr";
 
   return {
     title: isFR
-      ? "Digital Africa Xpace | Transformation Digitale Institutionnelle"
-      : "Digital Africa Xpace | Institutional Digital Transformation",
+      ? "À propos | Digital Africa Xpace"
+      : "About | Digital Africa Xpace",
 
     description: isFR
-      ? "Digital Africa Xpace accompagne les gouvernements et institutions dans leur transformation digitale stratégique."
-      : "Digital Africa Xpace supports governments and institutions in strategic digital transformation.",
-
-    keywords: isFR
-      ? ["transformation digitale", "gouvernement numérique", "solution digitale Afrique", "cybersécurité institutionnelle"]
-      : ["digital transformation Africa", "government digital solutions", "institutional cybersecurity"],
+      ? "Découvrez la vision, la mission et les valeurs de Digital Africa Xpace."
+      : "Discover the vision, mission and values of Digital Africa Xpace.",
 
     alternates: {
-      canonical: `https://www.daxsarl.net/${params.locale}`,
+      canonical: `https://www.daxsarl.net/${params.locale}/a-propos`,
       languages: {
-        fr: "/fr",
-        en: "/en",
+        fr: "/fr/a-propos",
+        en: "/en/a-propos",
       },
     },
 
     openGraph: {
-      title: "Digital Africa Xpace",
+      title: isFR
+        ? "À propos | Digital Africa Xpace"
+        : "About | Digital Africa Xpace",
       description: isFR
-        ? "Solutions digitales stratégiques pour institutions."
-        : "Strategic digital solutions for institutions.",
-      url: `https://www.daxsarl.net/${params.locale}`,
+        ? "Transformation digitale institutionnelle en Afrique."
+        : "Institutional digital transformation in Africa.",
+      url: `https://www.daxsarl.net/${params.locale}/a-propos`,
       siteName: "Digital Africa Xpace",
       locale: isFR ? "fr_FR" : "en_US",
       type: "website",
     },
   };
 }
+
 export function generateStaticParams() {
-  return [
-    { locale: "fr" },
-    { locale: "en" },
-  ];
+  return [{ locale: "fr" }, { locale: "en" }];
 }
 
 export default async function APropos({
@@ -88,7 +83,6 @@ export default async function APropos({
       conclusion:
         "Digital Africa Xpace se positionne comme un partenaire stratégique de confiance pour accompagner les institutions dans leur évolution numérique, avec une approche structurée, sécurisée et durable.",
     },
-
     en: {
       title: "About",
       subtitle:
@@ -126,28 +120,55 @@ export default async function APropos({
 
   return (
     <>
-      {/* Hero */}
-      <section className="pt-48 pb-24 bg-secondary text-white">
-        <div className="max-w-4xl mx-auto px-8 text-center">
-          <h1 className="text-5xl font-logo mb-6">{t.title}</h1>
-          <p className="text-gray-300 text-lg">{t.subtitle}</p>
-        </div>
-      </section>
+      {/* HERO */}
+{/* HERO */}
+<section className="relative pt-36 md:pt-44 lg:pt-48 pb-20 md:pb-24 bg-secondary text-white overflow-hidden">
 
-      {/* Content */}
-      <section className="py-24 bg-white">
-        <div className="max-w-5xl mx-auto px-8 space-y-20">
+  {/* SHAPE LEFT */}
+  <img
+    src="/images/dax-shapes.png"
+    alt=""
+    className="
+      pointer-events-none
+      absolute
+      left-0
+      bottom-0
+      w-40
+      md:w-64
+      lg:w-80
+      opacity-20
+      brightness-0
+      invert
+      z-0
+    "
+  />
+
+  <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-8 text-center">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-logo mb-6">
+      {t.title}
+    </h1>
+
+    <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">
+      {t.subtitle}
+    </p>
+  </div>
+</section>
+
+      {/* CONTENT */}
+      <section className="py-20 md:py-24 lg:py-28 bg-white">
+        <div className="max-w-5xl mx-auto px-6 md:px-8 space-y-16 md:space-y-20">
 
           <Block title={t.visionTitle} content={t.vision} />
 
           <Block title={t.missionTitle} content={t.mission} />
 
+          {/* VALUES */}
           <div>
-            <h2 className="text-3xl font-logo text-secondary mb-10">
+            <h2 className="text-2xl sm:text-3xl font-logo text-secondary mb-10 text-center md:text-left">
               {t.valuesTitle}
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
               {t.values.map((value, index) => (
                 <Value
                   key={index}
@@ -158,8 +179,9 @@ export default async function APropos({
             </div>
           </div>
 
-          <div className="border-t pt-16">
-            <p className="text-lg text-gray-700 leading-relaxed">
+          {/* CONCLUSION */}
+          <div className="border-t pt-12 md:pt-16">
+            <p className="text-base md:text-lg text-gray-700 leading-relaxed text-center md:text-left max-w-3xl">
               {t.conclusion}
             </p>
           </div>
@@ -178,11 +200,11 @@ function Block({
   content: string;
 }) {
   return (
-    <div>
-      <h2 className="text-3xl font-logo text-secondary mb-6">
+    <div className="max-w-3xl">
+      <h2 className="text-2xl sm:text-3xl font-logo text-secondary mb-6">
         {title}
       </h2>
-      <p className="text-gray-700 text-lg leading-relaxed">
+      <p className="text-gray-700 text-base md:text-lg leading-relaxed">
         {content}
       </p>
     </div>
@@ -197,14 +219,14 @@ function Value({
   description: string;
 }) {
   return (
-    <div className="relative pl-8">
-      <div className="absolute left-0 top-2 w-[3px] h-6 bg-primary"></div>
+    <div className="bg-gray-50 p-8 rounded-xl hover:shadow-lg transition duration-300">
+      <div className="w-1 h-8 bg-primary mb-6"></div>
 
-      <h3 className="text-xl font-semibold text-secondary mb-4">
+      <h3 className="text-lg md:text-xl font-semibold text-secondary mb-4">
         {title}
       </h3>
 
-      <p className="text-gray-600 leading-relaxed">
+      <p className="text-gray-600 text-sm md:text-base leading-relaxed">
         {description}
       </p>
     </div>

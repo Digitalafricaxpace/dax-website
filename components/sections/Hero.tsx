@@ -3,28 +3,32 @@
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Hero({ locale }: { locale: string }) {
+interface HeroProps {
+  locale: string;
+}
+
+export default function Hero({ locale }: HeroProps) {
   const isFR = locale === "fr";
 
   return (
-    <section className="pt-40 pb-32 bg-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section className="relative pt-32 md:pt-40 pb-24 md:pb-32 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
         {/* LEFT CONTENT */}
-        <div>
-          <h1 className="text-4xl md:text-6xl font-logo text-secondary leading-tight mb-8">
+        <div className="text-center md:text-left">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-logo text-secondary leading-tight mb-8">
             {isFR
               ? "Transformer vos idées en solutions digitales concrètes."
               : "Transforming your ideas into concrete digital solutions."}
           </h1>
 
-          <p className="text-gray-600 text-lg leading-relaxed mb-10 max-w-xl">
+          <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto md:mx-0">
             {isFR
               ? "Digital Africa Xpace conçoit et déploie des solutions numériques évolutives pour les gouvernements, institutions publiques et organisations stratégiques."
               : "Digital Africa Xpace designs and deploys scalable digital solutions for governments, public institutions and strategic organizations."}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start">
             <Link
               href={`/${locale}/services`}
               className="bg-secondary text-white px-8 py-4 rounded-md text-sm tracking-wide hover:opacity-90 transition text-center"
@@ -42,19 +46,19 @@ export default function Hero({ locale }: { locale: string }) {
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative h-[350px] md:h-[480px] rounded-xl overflow-hidden shadow-xl">
+        <div className="relative h-[320px] sm:h-[380px] md:h-[450px] lg:h-[520px] rounded-xl overflow-hidden shadow-2xl">
 
-          {/* Image */}
           <Image
             src="/images/hero-dax.jpg"
             alt="Digital institutional strategy"
             fill
-            className="object-cover"
             priority
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover"
           />
 
-          {/* Overlay institutionnel */}
-          <div className="absolute inset-0 bg-secondary/20"></div>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-secondary/15"></div>
 
         </div>
 

@@ -11,45 +11,75 @@ import {
 } from "lucide-react";
 import { dictionary } from "@/lib/dictionary";
 
-export default function Footer({ locale }: { locale: string }) {
+interface FooterProps {
+  locale: string;
+}
+
+export default function Footer({ locale }: FooterProps) {
   const safeLocale = locale === "en" ? "en" : "fr";
   const dict = dictionary[safeLocale];
 
   return (
-    <footer className="bg-[#0C2438] text-white mt-32">
-      <div className="max-w-7xl mx-auto px-10 py-20 grid md:grid-cols-4 gap-12">
+    <footer className="relative bg-[#0C2438] text-white mt-24 md:mt-32 overflow-hidden">
+
+      {/* LEFT SHAPE */}
+      <img
+        src="/images/dax-shapes.png"
+        alt=""
+        className="
+          pointer-events-none
+          absolute
+          bottom-0
+          left-0
+          w-40
+          md:w-64
+          lg:w-80
+          opacity-10
+          brightness-0
+          invert
+          z-0
+        "
+      />
+
+      {/* RIGHT SHAPE */}
+      <img
+        src="/images/dax-shapes.png"
+        alt=""
+        className="
+          pointer-events-none
+          absolute
+          bottom-0
+          right-0
+          w-40
+          md:w-64
+          lg:w-80
+          opacity-10
+          brightness-0
+          invert
+          scale-x-[-1]
+          z-0
+        "
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
 
         {/* Logo + Description */}
-        <div>
-          <h2 className="text-3xl font-logo mb-6 tracking-wide">
-            DAX
-          </h2>
+        <div className="text-center sm:text-left">
+          <h2 className="text-3xl font-logo mb-6 tracking-wide">DAX</h2>
 
-          <p className="text-gray-300 leading-relaxed text-sm mb-6">
+          <p className="text-gray-300 leading-relaxed text-sm mb-6 max-w-sm mx-auto sm:mx-0">
             {safeLocale === "fr"
               ? "Digital Africa Xpace conçoit et déploie des solutions numériques évolutives pour les gouvernements et institutions publiques."
               : "Digital Africa Xpace designs and deploys scalable digital solutions for governments and public institutions."}
           </p>
 
-          <div className="flex gap-5 text-gray-400">
-            <a className="hover:text-white transition">
-              <FacebookIcon size={18} strokeWidth={1.5} />
-            </a>
-            <a className="hover:text-white transition">
-              <LinkedinIcon size={18} strokeWidth={1.5} />
-            </a>
-            <a className="hover:text-white transition">
-              <TwitterIcon size={18} strokeWidth={1.5} />
-            </a>
-            <a className="hover:text-white transition">
-              <InstagramIcon size={18} strokeWidth={1.5} />
-            </a>
-            <a className="hover:text-white transition">
-              <Pin size={18} strokeWidth={1.5} />
-            </a>
-            <a className="hover:text-white transition">
-              <Music2 size={18} strokeWidth={1.5} />
-            </a>
+          <div className="flex justify-center sm:justify-start gap-5 text-gray-400">
+            <a className="hover:text-white transition"><FacebookIcon size={18} strokeWidth={1.5} /></a>
+            <a className="hover:text-white transition"><LinkedinIcon size={18} strokeWidth={1.5} /></a>
+            <a className="hover:text-white transition"><TwitterIcon size={18} strokeWidth={1.5} /></a>
+            <a className="hover:text-white transition"><InstagramIcon size={18} strokeWidth={1.5} /></a>
+            <a className="hover:text-white transition"><Pin size={18} strokeWidth={1.5} /></a>
+            <a className="hover:text-white transition"><Music2 size={18} strokeWidth={1.5} /></a>
           </div>
         </div>
 
@@ -75,41 +105,12 @@ export default function Footer({ locale }: { locale: string }) {
           </h3>
 
           <ul className="space-y-3 text-gray-300 text-sm">
-            <li>
-              <Link href={`/${safeLocale}/code-de-conduite`}>
-                {safeLocale === "fr" ? "Code de conduite" : "Code of Conduct"}
-              </Link>
-            </li>
-
-            <li>
-              <Link href={`/${safeLocale}/politique-inclusion`}>
-                {safeLocale === "fr" ? "Politique d’inclusion" : "Inclusion Policy"}
-              </Link>
-            </li>
-
-            <li>
-              <Link href={`/${safeLocale}/politique-environnementale`}>
-                {safeLocale === "fr" ? "Politique environnementale" : "Environmental Policy"}
-              </Link>
-            </li>
-
-            <li>
-              <Link href={`/${safeLocale}/politique-confidentialite`}>
-                {safeLocale === "fr" ? "Politique de confidentialité" : "Privacy Policy"}
-              </Link>
-            </li>
-
-            <li>
-              <Link href={`/${safeLocale}/mentions-legales`}>
-                {safeLocale === "fr" ? "Mentions légales" : "Legal Notice"}
-              </Link>
-            </li>
-
-            <li>
-              <Link href={`/${safeLocale}/signaler-un-abus`}>
-                {safeLocale === "fr" ? "Signaler un abus" : "Report Abuse"}
-              </Link>
-            </li>
+            <li><Link href={`/${safeLocale}/code-de-conduite`}>{safeLocale === "fr" ? "Code de conduite" : "Code of Conduct"}</Link></li>
+            <li><Link href={`/${safeLocale}/politique-inclusion`}>{safeLocale === "fr" ? "Politique d’inclusion" : "Inclusion Policy"}</Link></li>
+            <li><Link href={`/${safeLocale}/politique-environnementale`}>{safeLocale === "fr" ? "Politique environnementale" : "Environmental Policy"}</Link></li>
+            <li><Link href={`/${safeLocale}/politique-confidentialite`}>{safeLocale === "fr" ? "Politique de confidentialité" : "Privacy Policy"}</Link></li>
+            <li><Link href={`/${safeLocale}/mentions-legales`}>{safeLocale === "fr" ? "Mentions légales" : "Legal Notice"}</Link></li>
+            <li><Link href={`/${safeLocale}/signaler-un-abus`}>{safeLocale === "fr" ? "Signaler un abus" : "Report Abuse"}</Link></li>
           </ul>
         </div>
 
@@ -123,23 +124,28 @@ export default function Footer({ locale }: { locale: string }) {
             {dict.footer.newsletterText}
           </p>
 
-          <div className="flex">
+          <form className="flex flex-col sm:flex-row">
             <input
               type="email"
+              required
               placeholder="xxxx@xx.xx"
-              className="w-full px-4 py-3 text-sm rounded-l-md text-gray-900 outline-none"
+              className="w-full px-4 py-3 text-sm text-gray-900 rounded-md sm:rounded-l-md sm:rounded-r-none outline-none"
             />
-            <button className="bg-primary px-6 py-3 rounded-r-md text-sm font-semibold hover:opacity-90 transition">
+            <button
+              type="submit"
+              className="bg-primary px-6 py-3 mt-3 sm:mt-0 sm:rounded-r-md sm:rounded-l-none rounded-md text-sm font-semibold hover:opacity-90 transition"
+            >
               OK
             </button>
-          </div>
+          </form>
         </div>
 
       </div>
 
-      <div className="border-t border-white/10 py-6 text-center text-gray-400 text-sm">
+      <div className="relative z-10 border-t border-white/10 py-6 text-center text-gray-400 text-sm px-4">
         Digital Africa Xpace © 2026 — {dict.footer.rights}
       </div>
+
     </footer>
   );
 }

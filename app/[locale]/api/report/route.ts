@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const rateLimitMap = new Map<string, number>();
 
 function validateEmail(email: string) {
@@ -12,6 +10,15 @@ function validateEmail(email: string) {
 
 export async function POST(req: Request) {
   try {
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        { error: "Missing API key." },
+        { status: 500 }
+      );
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     const ip =
       req.headers.get("x-forwarded-for") ||
       req.headers.get("x-real-ip") ||
@@ -33,7 +40,10 @@ export async function POST(req: Request) {
     const { name, email, category, description, anonymous } = body;
 
     if (!category || typeof category !== "string") {
-      return NextResponse.json({ error: "Catégorie invalide." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Catégorie invalide." },
+        { status: 400 }
+      );
     }
 
     if (!description || description.length < 20 || description.length > 2000) {
@@ -44,7 +54,10 @@ export async function POST(req: Request) {
     }
 
     if (email && !validateEmail(email)) {
-      return NextResponse.json({ error: "Email invalide." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Email invalide." },
+        { status: 400 }
+      );
     }
 
     const formattedMessage = `
@@ -71,6 +84,7 @@ Date : ${new Date().toISOString()}
     });
 
     return NextResponse.json({ success: true });
+
   } catch (error) {
     console.error(error);
     return NextResponse.json(

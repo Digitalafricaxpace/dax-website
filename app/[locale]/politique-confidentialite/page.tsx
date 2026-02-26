@@ -5,47 +5,56 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }): Promise<Metadata> {
-
   const isFR = params.locale === "fr";
 
   return {
     title: isFR
-      ? "Digital Africa Xpace | Transformation Digitale Institutionnelle"
-      : "Digital Africa Xpace | Institutional Digital Transformation",
+      ? "Digital Africa Xpace | Politique de Confidentialité"
+      : "Digital Africa Xpace | Privacy Policy",
 
     description: isFR
-      ? "Digital Africa Xpace accompagne les gouvernements et institutions dans leur transformation digitale stratégique."
-      : "Digital Africa Xpace supports governments and institutions in strategic digital transformation.",
+      ? "Politique de confidentialité et protection des données de Digital Africa Xpace."
+      : "Privacy policy and data protection of Digital Africa Xpace.",
 
     keywords: isFR
-      ? ["transformation digitale", "gouvernement numérique", "solution digitale Afrique", "cybersécurité institutionnelle"]
-      : ["digital transformation Africa", "government digital solutions", "institutional cybersecurity"],
+      ? [
+          "politique de confidentialité",
+          "RGPD",
+          "protection des données",
+          "Digital Africa Xpace",
+        ]
+      : [
+          "privacy policy",
+          "GDPR",
+          "data protection",
+          "Digital Africa Xpace",
+        ],
 
     alternates: {
-      canonical: `https://www.daxsarl.net/${params.locale}`,
+      canonical: `https://www.daxsarl.net/${params.locale}/politique-confidentialite`,
       languages: {
-        fr: "/fr",
-        en: "/en",
+        fr: "/fr/politique-confidentialite",
+        en: "/en/politique-confidentialite",
       },
     },
 
     openGraph: {
-      title: "Digital Africa Xpace",
+      title: isFR
+        ? "Politique de Confidentialité | Digital Africa Xpace"
+        : "Privacy Policy | Digital Africa Xpace",
       description: isFR
-        ? "Solutions digitales stratégiques pour institutions."
-        : "Strategic digital solutions for institutions.",
-      url: `https://www.daxsarl.net/${params.locale}`,
+        ? "Protection des données et engagement envers la transparence."
+        : "Data protection and commitment to transparency.",
+      url: `https://www.daxsarl.net/${params.locale}/politique-confidentialite`,
       siteName: "Digital Africa Xpace",
       locale: isFR ? "fr_FR" : "en_US",
       type: "website",
     },
   };
 }
+
 export function generateStaticParams() {
-  return [
-    { locale: "fr" },
-    { locale: "en" },
-  ];
+  return [{ locale: "fr" }, { locale: "en" }];
 }
 
 export default async function PolitiqueConfidentialite({
@@ -124,7 +133,6 @@ export default async function PolitiqueConfidentialite({
         },
       ],
     },
-
     en: {
       title: "Privacy Policy",
       subtitle:
@@ -198,22 +206,42 @@ export default async function PolitiqueConfidentialite({
 
   return (
     <>
-      {/* Hero */}
-      <section className="pt-48 pb-24 bg-secondary text-white">
-        <div className="max-w-4xl mx-auto px-8 text-center">
-          <h1 className="text-5xl font-logo mb-6">
-            {t.title}
-          </h1>
-          <p className="text-gray-300 text-lg">
-            {t.subtitle}
-          </p>
-        </div>
-      </section>
+{/* HERO */}
+<section className="relative pt-36 md:pt-44 lg:pt-48 pb-20 md:pb-24 bg-secondary text-white overflow-hidden">
 
-      {/* Content */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-8 space-y-16">
+  {/* SHAPE LEFT */}
+  <img
+    src="/images/dax-shapes.png"
+    alt=""
+    className="
+      pointer-events-none
+      absolute
+      left-0
+      bottom-0
+      w-40
+      md:w-64
+      lg:w-80
+      opacity-20
+      brightness-0
+      invert
+      z-0
+    "
+  />
 
+  <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-8 text-center">
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-logo mb-6">
+      {t.title}
+    </h1>
+
+    <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto">
+      {t.subtitle}
+    </p>
+  </div>
+</section>
+
+      {/* CONTENT */}
+      <section className="py-20 md:py-24 lg:py-28 bg-white">
+        <div className="max-w-3xl md:max-w-4xl mx-auto px-6 md:px-8 space-y-14 md:space-y-16">
           {t.articles.map((article) => (
             <Article
               key={article.number}
@@ -222,7 +250,6 @@ export default async function PolitiqueConfidentialite({
               content={article.content}
             />
           ))}
-
         </div>
       </section>
     </>
@@ -239,18 +266,18 @@ function Article({
   content: string;
 }) {
   return (
-    <div className="relative pl-10">
-      <div className="absolute left-0 top-2 w-[3px] h-full bg-primary"></div>
+    <div className="relative pl-8 md:pl-10">
+      <div className="absolute left-0 top-2 w-[3px] h-full bg-primary rounded-full"></div>
 
-      <div className="mb-3 text-sm tracking-widest text-primary font-semibold">
+      <div className="mb-3 text-xs md:text-sm tracking-widest text-primary font-semibold">
         {number}
       </div>
 
-      <h2 className="text-2xl font-semibold text-secondary mb-4">
+      <h2 className="text-xl md:text-2xl font-semibold text-secondary mb-4">
         {title}
       </h2>
 
-      <p className="text-gray-700 leading-relaxed">
+      <p className="text-gray-700 text-sm md:text-base leading-relaxed">
         {content}
       </p>
     </div>

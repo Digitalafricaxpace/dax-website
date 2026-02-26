@@ -2,52 +2,43 @@
 
 import Link from "next/link";
 
-export default function ProductsPreview({ locale }: { locale: string }) {
+interface ProductsPreviewProps {
+  locale: string;
+}
+
+export default function ProductsPreview({ locale }: ProductsPreviewProps) {
   const isFR = locale === "fr";
 
   return (
-    <section className="py-32 bg-secondary text-white">
-      <div className="max-w-7xl mx-auto px-12 grid md:grid-cols-2 gap-20 items-center">
+    <section className="py-20 md:py-28 lg:py-32 bg-secondary text-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 
-        {/* Left Content */}
-        <div>
-          <h2 className="text-4xl md:text-5xl font-logo leading-tight mb-8">
+        {/* LEFT CONTENT */}
+        <div className="text-center lg:text-left">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-logo leading-tight mb-8">
             {isFR ? (
               <>
-                Si Vote Argent Pouvait Parler, Que Dirait-Il ? <br />
+                Si votre argent pouvait parler, que dirait-il ? <br />
                 <span className="text-primary">CashMap</span> vous aide à l'écouter.
               </>
             ) : (
               <>
-                If Your Money Could Speak, What Would It Say? <br />
+                If your money could speak, what would it say? <br />
                 <span className="text-primary">CashMap</span> helps you listen.
               </>
             )}
           </h2>
 
-          <p className="text-gray-300 text-lg leading-relaxed mb-10 max-w-xl">
+          <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto lg:mx-0">
             {isFR
               ? "CashMap est une solution digitale innovante permettant d’optimiser la gestion financière, améliorer la transparence budgétaire et renforcer l’efficacité des institutions."
-              : "CashMap est une plateforme numérique performante conçue pour vous offrir précision et transparence dans la gestion de votre argent, que vous soyez étudiant, professionnel ou institution."}
+              : "CashMap is a powerful digital platform designed to provide precision and transparency in financial management for institutions and organizations."}
           </p>
 
-          <ul className="space-y-4 text-gray-300 mb-10">
-            <li>
-              {isFR
-                ? "• Suivez vos finances avec précision"
-                : "• Track precisely"}
-            </li>
-            <li>
-              {isFR
-                ? "• Visualisez clairement"
-                : "• Visualize clearly"}
-            </li>
-            <li>
-              {isFR
-                ? "• Agissez en toute confiance"
-                : "• Act confidently"}
-            </li>
-            
+          <ul className="space-y-4 text-gray-300 mb-10 text-sm sm:text-base max-w-md mx-auto lg:mx-0">
+            <li>• {isFR ? "Suivez vos finances avec précision" : "Track your finances precisely"}</li>
+            <li>• {isFR ? "Visualisez clairement vos données" : "Visualize your data clearly"}</li>
+            <li>• {isFR ? "Agissez en toute confiance" : "Act with confidence"}</li>
           </ul>
 
           <Link
@@ -58,9 +49,9 @@ export default function ProductsPreview({ locale }: { locale: string }) {
           </Link>
         </div>
 
-        {/* Right Visual */}
-        <div className="h-[450px] bg-white/10 rounded-lg backdrop-blur-sm flex items-center justify-center">
-          <span className="text-gray-300">
+        {/* RIGHT VISUAL */}
+        <div className="relative h-[320px] sm:h-[380px] md:h-[420px] lg:h-[480px] bg-white/10 rounded-xl backdrop-blur-sm flex items-center justify-center shadow-xl">
+          <span className="text-gray-300 text-sm sm:text-base text-center px-6">
             {isFR
               ? "Aperçu de l'application / Dashboard"
               : "Application preview / Dashboard"}
