@@ -70,6 +70,7 @@ export default async function ContactPage({
   return (
     <>
       {/* Hero */}
+<<<<<<< HEAD
 {/* HERO */}
 <section className="relative pt-36 md:pt-44 lg:pt-48 pb-20 md:pb-24 bg-secondary text-white text-center overflow-hidden">
 
@@ -102,6 +103,14 @@ export default async function ContactPage({
     </p>
   </div>
 </section>
+=======
+      <section className="pt-48 pb-24 bg-secondary text-white text-center">
+        <div className="max-w-4xl mx-auto px-8">
+          <h1 className="text-5xl font-logo mb-6">{t.title}</h1>
+          <p className="text-gray-300 text-lg">{t.subtitle}</p>
+        </div>
+      </section>
+>>>>>>> 33adcf1a4ad5e9f31ec552444687206f7ccfeb63
 
       {/* Contact Section */}
       <section className="py-24 bg-white">
